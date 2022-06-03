@@ -61,9 +61,34 @@ export class TodolistApiStack extends Stack {
       fieldName: 'createTodo'
     });
 
-    // pass table name to todo lambda and grant permissions
+    // pass table name to create todo lambda and grant permissions
     createToDoLambda.addEnvironment('TABLE_NAME', todosTable.tableName);
     todosTable.grantWriteData(createToDoLambda);
+
+    // delete todo
+
+    // delete todo lambda
+    const deleteToDoLambda = new NodejsFunction(this, 'deletetodolambda', {
+      functionName: 'deletetodolambda',
+      runtime: Runtime.NODEJS_14_X,
+      entry: 'dist/src/lambdas/delete.js',
+      logRetention: RetentionDays.ONE_WEEK,
+      architecture: Architecture.ARM_64,
+      memorySize: 256
+    });
+
+    // delete todo lambda datasource
+    const deleteToDoLambdaDs = api.addLambdaDataSource('deletetodolist', deleteToDoLambda);
+
+    // delete todo lambda datasource resolver
+    deleteToDoLambdaDs.createResolver({
+      typeName: 'Mutation',
+      fieldName: 'deleteTodo'
+    });
+
+    // pass table name to delete todo lambda and grant permissions
+    deleteToDoLambda.addEnvironment('TABLE_NAME', todosTable.tableName);
+    todosTable.grantWriteData(deleteToDoLambda);
 
   }
 }

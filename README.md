@@ -26,3 +26,10 @@ mutation MyMutation {
 }
 ```
 
+## Deleting a todo item by id
+
+```graphql
+mutation MyMutation($id: ID = "55579252-bd0c-46d9-a310-cba3b2649a67") {
+  deleteTodo(id: $id)
+}
+```

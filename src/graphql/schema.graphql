@@ -1,0 +1,33 @@
+input ToDoInput {
+	author: String!
+	content: String!
+}
+
+type ToDoItem {
+  id: ID!
+  content: String!
+  author: String!
+  createdAt: String!
+	updatedAt: String
+}
+
+type ListToDos {
+	total: String
+	items: [ToDoItem]
+}
+
+type Mutation {
+	createTodo(todo: ToDoInput!): ToDoItem
+	deleteTodo(id: ID!): ID
+	updateTodo(id: ID! content: String!): ToDoItem
+}
+
+type Query {
+	getTodo(id: ID!): ToDoItem
+  listTodos: ListToDos
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}

@@ -1,14 +1,14 @@
-# Welcome to your CDK TypeScript project
+# Todos App using AWS CDK, AppSync GraphQL, Lambda, Dynamo DB
 
-This is a blank project for CDK development with TypeScript.
+## Authentication
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+API usage authenticated using `API_KEY`. To view the key:
 
-## Useful commands
+```sh
+aws appsync list-api-keys --api-id <api-id>
+```
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+The api key expires in 7 days. 
+
+To query the api via postman or insomnia, add the header `x-api-key` to the value of the api key. 
+

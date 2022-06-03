@@ -12,3 +12,17 @@ The api key expires in 7 days.
 
 To query the api via postman or insomnia, add the header `x-api-key` to the value of the api key. 
 
+## Adding todos
+
+```graphql
+mutation MyMutation {
+  createTodo(todo: {author: "sanjay", content: "test content"}) {
+    author
+    content
+    createdAt
+    id
+    updatedAt
+  }
+}
+```
+
